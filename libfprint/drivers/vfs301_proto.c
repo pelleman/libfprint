@@ -33,7 +33,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <libusb-1.0/libusb.h>
+#include <libusb.h>
 
 #include "vfs301_proto.h"
 #include "vfs301_proto_fragments.h"

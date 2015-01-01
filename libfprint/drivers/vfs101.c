@@ -27,6 +27,10 @@
 
 #include "driver_ids.h"
 
+#ifndef ETIME
+#define ETIME ETIMEDOUT /* For kFreeBSD */
+#endif
+
 /* Input-Output usb endpoint */
 #define EP_IN(n)	(n | LIBUSB_ENDPOINT_IN)
 #define EP_OUT(n)	(n | LIBUSB_ENDPOINT_OUT)

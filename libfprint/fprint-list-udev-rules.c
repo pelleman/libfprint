@@ -59,9 +59,6 @@ static void print_driver (struct fp_driver *driver)
 		break;
 	    }
 	}
-	if (blacklist)
-	    continue;
-
 	key = g_strdup_printf ("%04x:%04x", driver->id_table[i].vendor, driver->id_table[i].product);
 
 	if (g_hash_table_lookup (printed, key) != NULL) {
@@ -74,7 +71,10 @@ static void print_driver (struct fp_driver *driver)
 	if (num_printed == 0)
 	    printf ("# %s\n", driver->full_name);
 
-	printf ("SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"%04x\", ATTRS{idProduct}==\"%04x\", ATTRS{dev}==\"*\", ATTR{power/control}=\"auto\"\n", driver->id_table[i].vendor, driver->id_table[i].product);
+	printf ("SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"%04x\", ATTRS{idProduct}==\"%04x\", ATTRS{dev}==\"*\", ", driver->id_table[i].vendor, driver->id_table[i].product);
+	if (!blacklist)
+		printf ("ATTR{power/control}=\"auto\", ");
+	printf ("MODE=\"0664\", GROUP=\"plugdev\"\n");
 	num_printed++;
     }
 

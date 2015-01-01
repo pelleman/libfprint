@@ -21,13 +21,14 @@
 
 #define FP_COMPONENT "vfs301"
 
+
 #include <errno.h>
 #include <signal.h>
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
-#include <libusb-1.0/libusb.h>
+#include <libusb.h>
 
 #include "vfs301_proto.h"
 #include <unistd.h>
@@ -35,6 +36,10 @@
 #include <fp_internal.h>
 
 #include "driver_ids.h"
+
+#ifndef ETIME
+#define ETIME ETIMEDOUT /* For kFreeBSD */
+#endif
 
 /************************** GENERIC STUFF *************************************/
 
